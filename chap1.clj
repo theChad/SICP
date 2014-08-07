@@ -1,5 +1,6 @@
 (ns chap1)
 
+; 1.11
 (defn f123
   [n]
   (if (< n 3) n
@@ -13,3 +14,24 @@
 (defn f123-it
   [n]
   (f123-iter n 0 1 2))
+
+; 1.12
+; (pascal n) computes *row* n of pascal's triangle, not element n.
+; Maybe not exactly what was asked for.
+(defn line-right
+  [old-line]
+  (if (empty? (rest old-line)) '(1)
+    (cons (+ (first old-line) (first (rest old-line)))
+      (line-right (rest old-line)))))
+      
+(defn make-line
+  [old-line]
+  (cons 1 (line-right old-line)))
+
+(defn pascal-recur 
+  [n last-line]
+  (if (= n 0) last-line
+    (recur (dec n) (make-line last-line))))
+    
+(defn pascal [n]
+  (pascal-recur n '(1)))
