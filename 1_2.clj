@@ -50,7 +50,7 @@
   [b n]
   (fast-expt-iter b n 1))
 
-; 1.17
+; 1.17 & 1.18
 (defn fast-mult-iter
   [a b prod]
   (cond (= b 0) prod
@@ -60,4 +60,8 @@
 (defn fast-mult
   [a b]
   (fast-mult-iter a b 0))
+
+; 1.19
+; p' = p^2 + q^2
+; q' = q^2 + 2*p*q
 
