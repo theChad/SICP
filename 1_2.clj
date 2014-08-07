@@ -35,3 +35,29 @@
     
 (defn pascal [n]
   (pascal-recur n '(1)))
+
+; 1.16
+(defn fast-expt-iter
+  [b n a]
+  "Helper for fast-iter"
+  (if (= 0 n) a
+    (if (even? n)
+      (recur (*' b b) (/ n 2) a)
+      (recur b (- n 1) (* a b)))))
+
+(defn fast-expt
+  "Iteratively calculate b^n, using a helper function."
+  [b n]
+  (fast-expt-iter b n 1))
+
+; 1.17
+(defn fast-mult-iter
+  [a b prod]
+  (cond (= b 0) prod
+    (even? b) (recur (* 2 a) (/ b 2) prod)
+    :else (recur a (dec b) (+ a prod))))
+
+(defn fast-mult
+  [a b]
+  (fast-mult-iter a b 0))
+
