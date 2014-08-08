@@ -64,4 +64,23 @@
 ; 1.19
 ; p' = p^2 + q^2
 ; q' = q^2 + 2*p*q
-
+(defn fib-iter
+  [n a b p q]
+  (cond (= n 0) b
+    (even? n)
+      (let [p-prime (+ (* p p) (* q q))
+            q-prime (+ (* q q) (* 2 p q))]
+        (fib-iter (/ n 2) a b p-prime q-prime))
+    :else
+      (let [p-prime q
+            q-prime q]
+        (fib-iter (dec n) 
+          (+ (* b q) (* a q) (* a p))
+          (+ (* b p) (* a q)) 
+          p
+          q))))
+          
+(defn fib
+  "Compute Fibonacci sequence in log n"
+  [n]
+  (fib-iter n 1N 0 0 1N))
