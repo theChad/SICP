@@ -72,13 +72,11 @@
             q-prime (+ (* q q) (* 2 p q))]
         (fib-iter (/ n 2) a b p-prime q-prime))
     :else
-      (let [p-prime q
-            q-prime q]
-        (fib-iter (dec n) 
-          (+ (* b q) (* a q) (* a p))
-          (+ (* b p) (* a q)) 
-          p
-          q))))
+      (fib-iter (dec n) 
+        (+ (* b q) (* a q) (* a p))
+        (+ (* b p) (* a q)) 
+        p
+        q)))
           
 (defn fib
   "Compute Fibonacci sequence in log n"
